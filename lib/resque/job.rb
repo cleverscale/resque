@@ -153,7 +153,8 @@ module Resque
       # If an exception occurs during the job execution, look for an
       # on_failure hook then re-raise.
       rescue Object => e
-        run_failure_hooks(e)
+        # run_failure_hooks(e) Already called just after by Worker#perform.rescue => Job#fail
+        # Of course, makes tests failed
         raise e
       end
     end
